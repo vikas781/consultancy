@@ -95,7 +95,7 @@ nav {
   
   /* === GLASSMORPHISM EFFECT === */
   background: rgba(255, 255, 255, 0.3); /* Light translucent effect */
-  backdrop-filter: blur(10px); /* Soft blur */
+  backdrop-filter: blur(11px); /* Soft blur */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s, backdrop-filter 0.3s, background 0.3s;
 }
@@ -103,8 +103,16 @@ nav {
 /* === FIX: Make it clearer when hovered === */
 .product:hover {
   transform: scale(1.05);
-  background: rgba(255, 255, 255, 1 ); /* Increase visibility */
-  backdrop-filter: blur(120px); /* Reduce blur to make text readable */
+  background: #fff; /* Solid white background */
+  backdrop-filter: none; /* Remove the blur */
+  border: 1px solid #ccc;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+/* === Fix Text Visibility === */
+.product:hover h3, 
+.product:hover p {
+  color: #000000; /* Darken text color for visibility */
+  font-weight: bold;
 }
 
 
@@ -124,10 +132,12 @@ nav {
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.3s;
 }
 
 .product button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
 /* ========================== */
@@ -135,40 +145,53 @@ nav {
 /* ========================== */
 .cart-slide {
   position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
+  top: 50px; /* Adjust the top offset to reduce the height from the top */
+  right: 2px;
+  height: calc(100% - 50px); /* Adjust the total height */
+  max-height: 87%; /* Optionally limit the height */
   width: 350px;
   background-color: #f9f9f9;
   border-left: 2px solid #ddd;
-  padding: 20px;
+  padding: 10px;
   box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  overflow-y: auto; /* Enable scrolling if needed */
   transform: translateX(100%);
   transition: transform 0.5s ease-in-out;
   z-index: 1000;
 }
 
+
+
 /* OPEN CART */
 .cart-slide.open {
   transform: translateX(0);
+  border-radius: 20px;
+  padding-bottom: 30px;
+  padding-top: 0;
+  
 }
 
 /* Cart Header */
 .cart-slide h2 {
   font-size: 22px;
+  text-align: center;
   color: #333;
   margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
+  border-radius: 15px 15px 15px 15px; /* Optional: Adds rounded top corners */
+  padding-top:10px;
+  padding-bottom: 15px;
+  background-color: #ebeaea; /* Ensures the header has a background */
+  position: sticky; /* Makes the header stick to the top of the container */
+  top: 0; /* Sticks it to the top of the cart container */
+  z-index: 10; /* Ensures it appears above other elements in the cart */
 }
 
 /* ============================= */
 /* CART ITEM SECTION             */
 /* ============================= */
 .cart-item {
-  border-bottom: 1px solid #020202;
-  padding: 10px 0;
+  border-bottom: 1px solid #02020241;
+  padding: 10px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -301,6 +324,7 @@ nav {
 /* ============================= */
 @media (max-width: 768px) {
   .cart-slide {
-    width: 280px;
+    top: 40px; /* Reduce from top even more for smaller screens */
+    height: calc(100% - 40px);
   }
 }
